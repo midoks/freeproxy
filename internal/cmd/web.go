@@ -3,9 +3,10 @@ package cmd
 import (
 	// "fmt"
 	"github.com/urfave/cli"
-	// "github.com/midoks/freeproxy/internal/app"
-	// "github.com/midoks/freeproxy/internal/app/router"
-	// "github.com/midoks/freeproxy/internal/conf"
+
+	"github.com/midoks/freeproxy/internal/app"
+	"github.com/midoks/freeproxy/internal/app/router"
+	"github.com/midoks/freeproxy/internal/conf"
 )
 
 var Run = cli.Command{
@@ -19,11 +20,11 @@ var Run = cli.Command{
 }
 
 func WebRun(c *cli.Context) error {
-	// err := router.Init(c.String("config"))
-	// if err != nil {
-	// 	return err
-	// }
+	err := router.Init(c.String("config"))
+	if err != nil {
+		return err
+	}
 
-	// app.Start(conf.Rpc.HttpPort)
+	app.Start(conf.Http.Port)
 	return nil
 }

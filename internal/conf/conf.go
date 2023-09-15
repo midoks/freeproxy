@@ -51,5 +51,9 @@ func Init(customConf string) error {
 		return errors.Wrap(err, "mapping [cache] section")
 	}
 
+	if err = File.Section("http").MapTo(&Http); err != nil {
+		return errors.Wrap(err, "mapping [http] section")
+	}
+
 	return nil
 }

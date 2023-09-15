@@ -3,9 +3,11 @@ frequency: 3
 dirfilter:
 - tmp
 - .git
+- .github
 - public
 - scripts
 - vendor
+- assets
 - logs
 - templates
 ext:

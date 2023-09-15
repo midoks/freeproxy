@@ -28,11 +28,8 @@ var (
 		Host     string
 	}
 
-	// web settings
-	Rpc struct {
-		HttpAddr    string `ini:"http_addr"`
-		HttpPort    int    `ini:"http_port"`
-		Domain      string
-		AppDataPath string
+	// http settings
+	Http struct {
+		Port int `ini:"http_port"`
 	}
 )
