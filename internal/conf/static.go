@@ -35,15 +35,4 @@ var (
 		Domain      string
 		AppDataPath string
 	}
-
-	// Repo settings
-	Repo struct {
-		RootPath string
-	}
-
-	// Other settings
-	Other struct {
-		ShowFooterBranding         bool
-		ShowFooterTemplateLoadTime bool
-	}
 )

@@ -4,7 +4,7 @@ import (
 	"github.com/pkg/errors"
 	"gopkg.in/ini.v1"
 
-	"github.com/freeproxy/internal/assets/conf"
+	"github.com/midoks/freeproxy/internal/assets/conf"
 )
 
 // Asset is a wrapper for getting conf assets.
@@ -49,8 +49,6 @@ func Init(customConf string) error {
 
 	if err = File.Section("cache").MapTo(&Cache); err != nil {
 		return errors.Wrap(err, "mapping [cache] section")
-	} else if err = File.Section("other").MapTo(&Other); err != nil {
-		return errors.Wrap(err, "mapping [other] section")
 	}
 
 	return nil

@@ -1,11 +1,11 @@
 package main
 
 import (
-	// "log"
 	"os"
 
-	"github.com/freeproxy/internal/cmd"
-	"github.com/freeproxy/internal/conf"
+	"github.com/midoks/freeproxy/internal/cmd"
+	"github.com/midoks/freeproxy/internal/conf"
+	"github.com/midoks/freeproxy/internal/log"
 	"github.com/urfave/cli"
 )
 
@@ -20,7 +20,7 @@ func main() {
 	app.Usage = "free proxy service"
 	app.Version = conf.App.Version
 	app.Commands = []cli.Command{
-		cmd.Web,
+		cmd.Run,
 	}
 
 	if err := app.Run(os.Args); err != nil {
