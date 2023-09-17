@@ -12,13 +12,15 @@ dirfilter:
 - templates
 ext:
 - go
-enablerun: false
+enablerun: true
 action:
   before:
   - go generate internal/assets/conf/conf.go
   - ps -ef|grep 'freeproxy web'| grep -v grep | awk '{print $2}' | xargs kill -9
+  - rm -rf ./freeproxy
   after:
-  - ./freeproxy web &
+  - if [ -f freeproxy ];then ./freeproxy web & fi
   exit:
   - ps -ef|grep 'freeproxy web'| grep -v grep | awk '{print $2}' | xargs kill -9
+  - rm -rf ./freeproxy
 link: https://github.com/midoks/zzz

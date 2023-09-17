@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"encoding/json"
 	"os"
 	"os/user"
 )
@@ -46,4 +47,10 @@ func CurrentUsername() string {
 		username = user.Username
 	}
 	return username
+}
+
+// https://stackoverflow.com/questions/22128282/how-to-check-string-is-in-json-format
+func IsJSON(str string) bool {
+	var js json.RawMessage
+	return json.Unmarshal([]byte(str), &js) == nil
 }

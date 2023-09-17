@@ -3,10 +3,11 @@ package main
 import (
 	"os"
 
+	"github.com/urfave/cli"
+
 	"github.com/midoks/freeproxy/internal/cmd"
 	"github.com/midoks/freeproxy/internal/conf"
 	"github.com/midoks/freeproxy/internal/log"
-	"github.com/urfave/cli"
 )
 
 func init() {

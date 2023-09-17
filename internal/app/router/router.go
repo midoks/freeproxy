@@ -35,14 +35,11 @@ func autoMakeCustomConf(customConf string) error {
 		}
 	}
 
-	cfg.Section("").Key("app_name").SetValue("facegit-rpc")
+	cfg.Section("").Key("app_name").SetValue("freeproxy")
 	cfg.Section("").Key("run_mode").SetValue("prod")
 
-	cfg.Section("rpc").Key("http_port").SetValue("8080")
+	cfg.Section("http").Key("port").SetValue("2000")
 	cfg.Section("session").Key("provider").SetValue("file")
-
-	repoPath := fmt.Sprintf("%s/data/repo", dir)
-	cfg.Section("repo").Key("root_path").SetValue(repoPath)
 
 	os.MkdirAll(repoPath, os.ModePerm)
 	os.MkdirAll(filepath.Dir(customConf), os.ModePerm)

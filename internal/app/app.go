@@ -1,8 +1,7 @@
 package app
 
 import (
-	// "fmt"
-	// "net/http"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,5 +14,5 @@ func Start(port int) {
 			"message": "pong",
 		})
 	})
-	r.Run()
+	r.Run(fmt.Sprintf(":%d", port))
 }

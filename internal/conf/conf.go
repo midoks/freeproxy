@@ -47,10 +47,16 @@ func Init(customConf string) error {
 		return errors.Wrap(err, "mapping [log] section")
 	}
 
+	// ***************************
+	// ----- Cache settings -----
+	// ***************************
 	if err = File.Section("cache").MapTo(&Cache); err != nil {
 		return errors.Wrap(err, "mapping [cache] section")
 	}
 
+	// ***************************
+	// ----- Http settings -----
+	// ***************************
 	if err = File.Section("http").MapTo(&Http); err != nil {
 		return errors.Wrap(err, "mapping [http] section")
 	}

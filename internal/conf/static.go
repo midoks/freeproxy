@@ -30,6 +30,6 @@ var (
 
 	// http settings
 	Http struct {
-		Port int `ini:"http_port"`
+		Port int `ini:"port"`
 	}
 )
