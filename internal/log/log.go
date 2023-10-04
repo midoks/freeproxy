@@ -9,6 +9,7 @@ import (
 )
 
 var (
+	Format      = "json"
 	logFileName = "freeproxy.log"
 	logger      *go_logger.Logger
 )
