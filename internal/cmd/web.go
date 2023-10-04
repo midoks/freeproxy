@@ -3,12 +3,13 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/gin-gonic/gin"
 	"github.com/oschwald/geoip2-golang"
 	"github.com/urfave/cli"
 
-	"github.com/midoks/freeproxy/internal/app"
 	"github.com/midoks/freeproxy/internal/app/router"
 	"github.com/midoks/freeproxy/internal/conf"
+	"github.com/midoks/freeproxy/internal/structs"
 )
 
 var Run = cli.Command{
@@ -27,6 +28,8 @@ func WebRun(c *cli.Context) error {
 		return err
 	}
 
+	verbose := true
+
 	bytes, readFileError := conf.App.StaticFile.ReadFile("static/GeoLite2-Country.mmdb")
 
 	if readFileError != nil {
@@ -39,7 +42,19 @@ func WebRun(c *cli.Context) error {
 		return dbErr
 	}
 
-	fmt.Println("ddd:", db)
-	app.Start(conf.Http.Port)
+	quit := make(chan bool)
+	proxiesChan := make(chan []structs.Proxy, 99999)
+	Collect(db, quit, proxiesChan, []string{"http", "https", "socks4", "socks5"}, []string{}, []int{}, verbose)
+
+	fmt.Println("ddd:", proxiesChan)
+
+	r := gin.Default()
+	r.SetTrustedProxies([]string{"127.0.0.1"})
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run(fmt.Sprintf(":%d", conf.Http.Port))
 	return nil
 }
