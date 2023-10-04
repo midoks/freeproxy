@@ -8,7 +8,9 @@ require (
 	github.com/phachon/go-logger v0.0.0-20191215032019-86e4227f71ea
 	github.com/pkg/errors v0.9.1
 	github.com/urfave/cli v1.22.14
+	golang.org/x/net v0.10.0
 	gopkg.in/ini.v1 v1.67.0
+	h12.io/socks v1.0.3
 )
 
 require (
@@ -37,7 +39,6 @@ require (
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	golang.org/x/arch v0.3.0 // indirect
 	golang.org/x/crypto v0.9.0 // indirect
-	golang.org/x/net v0.10.0 // indirect
 	golang.org/x/sys v0.9.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
