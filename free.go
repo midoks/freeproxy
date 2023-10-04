@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"os"
 
 	"github.com/urfave/cli"
@@ -10,8 +11,12 @@ import (
 	"github.com/midoks/freeproxy/internal/log"
 )
 
+//go:embed static/*
+var assetFS embed.FS
+
 func init() {
 	conf.App.Version = "0.0.1"
+	conf.App.StaticFile = assetFS
 }
 
 func main() {
@@ -20,6 +25,7 @@ func main() {
 	app.Name = "FreeProxy"
 	app.Usage = "free proxy service"
 	app.Version = conf.App.Version
+
 	app.Commands = []cli.Command{
 		cmd.Run,
 	}

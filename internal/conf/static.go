@@ -1,8 +1,7 @@
 package conf
 
 import (
-// "net/url"
-// "os"
+	"embed"
 )
 
 var (
@@ -13,6 +12,9 @@ var (
 
 		Name    string
 		RunMode string
+		RunUser string
+
+		StaticFile embed.FS
 	}
 
 	// log
@@ -31,5 +33,11 @@ var (
 	// http settings
 	Http struct {
 		Port int `ini:"port"`
+	}
+
+	// Security settings
+	Security struct {
+		InstallLock bool
+		SecretKey   string
 	}
 )

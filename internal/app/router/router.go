@@ -1,7 +1,7 @@
 package router
 
 import (
-	"fmt"
+	// "fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -17,7 +17,7 @@ import (
 
 func autoMakeCustomConf(customConf string) error {
 
-	dir, err := os.Getwd()
+	_, err := os.Getwd()
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,6 @@ func autoMakeCustomConf(customConf string) error {
 	cfg.Section("http").Key("port").SetValue("2000")
 	cfg.Section("session").Key("provider").SetValue("file")
 
-	os.MkdirAll(repoPath, os.ModePerm)
 	os.MkdirAll(filepath.Dir(customConf), os.ModePerm)
 	if err := cfg.SaveTo(customConf); err != nil {
 		return err

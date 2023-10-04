@@ -1,7 +1,9 @@
 package cmd
 
 import (
-	// "fmt"
+	"fmt"
+
+	"github.com/oschwald/geoip2-golang"
 	"github.com/urfave/cli"
 
 	"github.com/midoks/freeproxy/internal/app"
@@ -25,6 +27,19 @@ func WebRun(c *cli.Context) error {
 		return err
 	}
 
+	bytes, readFileError := conf.App.StaticFile.ReadFile("static/GeoLite2-Country.mmdb")
+
+	if readFileError != nil {
+		fmt.Sprintf("read geo error: %v", readFileError)
+		return readFileError
+	}
+	db, dbErr := geoip2.FromBytes(bytes)
+	if dbErr != nil {
+		fmt.Sprintf("read geoip2 error: %v", dbErr)
+		return dbErr
+	}
+
+	fmt.Println("ddd:", db)
 	app.Start(conf.Http.Port)
 	return nil
 }

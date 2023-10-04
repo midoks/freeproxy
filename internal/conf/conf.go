@@ -1,6 +1,8 @@
 package conf
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 	"gopkg.in/ini.v1"
 
@@ -59,6 +61,22 @@ func Init(customConf string) error {
 	// ***************************
 	if err = File.Section("http").MapTo(&Http); err != nil {
 		return errors.Wrap(err, "mapping [http] section")
+	}
+
+	// *****************************
+	// ----- Security settings -----
+	// *****************************
+
+	if err = File.Section("security").MapTo(&Security); err != nil {
+		return errors.Wrap(err, "mapping [security] section")
+	}
+
+	// Check run user when the install is locked.
+	if Security.InstallLock {
+		currentUser, match := CheckRunUser(App.RunUser)
+		if !match {
+			return fmt.Errorf("user configured to run imail is %q, but the current user is %q", App.RunUser, currentUser)
+		}
 	}
 
 	return nil
