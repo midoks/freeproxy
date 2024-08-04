@@ -16,6 +16,7 @@ enablerun: true
 action:
   before:
   - go generate internal/assets/conf/conf.go
+  - find . -name ".DS_Store" -print -delete
   - ps -ef|grep 'freeproxy web'| grep -v grep | awk '{print $2}' | xargs kill -9
   - rm -rf ./freeproxy
   after:
